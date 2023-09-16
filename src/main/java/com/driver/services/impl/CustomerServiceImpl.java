@@ -57,7 +57,9 @@ public class CustomerServiceImpl implements CustomerService {
 		trip.setDistanceInKm(distanceInKm);
 		trip.setStatus(TripStatus.CONFIRMED);
 		
-		List<Cab> c = cabRepository2.findByAvaible(true);
+		List<Cab> c = cabRepository2.findByAvailable(true);
+		if(c.isEmpty())
+			return null;
 		Cab cab = c.get(0);
 		cab.setAvailable(false);
 		cabRepository2.save(cab);
@@ -83,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return;
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.CANCELED);
-		Cab c = cabRepository2.findByDriver(tt.getDriver().getDriverId());
+		Cab c = cabRepository2.findByDriver(tt.getDriver());
 		c.setAvailable(false);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);
@@ -98,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return;
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.COMPLETED);
-		Cab c = cabRepository2.findByDriver(tt.getDriver().getDriverId());
+		Cab c = cabRepository2.findByDriver(tt.getDriver());
 		c.setAvailable(false);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);

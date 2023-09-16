@@ -41,8 +41,9 @@ public class AdminServiceImpl implements AdminService {
 			return null;
 		Admin d = updateadmin.get();
 		d.setPassword(password);
-		adminRepository1.save(d);
-		return d;
+		Admin d1 = adminRepository1.save(d);
+		
+		return d1;
 	}
 
 	@Override

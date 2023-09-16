@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.driver.model.Cab;
+import com.driver.model.Driver;
 
 @Repository
 public interface CabRepository extends JpaRepository<Cab, Integer> {
 
-	Cab findByDriver(int drivreId);
+	Cab findByDriver(Driver drivre);
 	
-	List<Cab> findByAvaible(boolean b);
+	List<Cab> findByAvailable(boolean b);
 	
 }
