@@ -51,7 +51,8 @@ public class CustomerServiceImpl implements CustomerService {
 		//Avoid using SQL query
 		TripBooking trip = new TripBooking();
 		Optional<Customer> cus=customerRepository2.findById(customerId);
-		
+		if(cus.isEmpty())
+			return null;
 		trip.setToLocation(toLocation);
 		trip.setFromLocation(fromLocation);
 		trip.setDistanceInKm(distanceInKm);
@@ -86,7 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.CANCELED);
 		Cab c = cabRepository2.findByDriver(tt.getDriver());
-		c.setAvailable(false);
+		c.setAvailable(true);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);
 	}
@@ -101,7 +102,7 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.COMPLETED);
 		Cab c = cabRepository2.findByDriver(tt.getDriver());
-		c.setAvailable(false);
+		c.setAvailable(true);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);
 	}
