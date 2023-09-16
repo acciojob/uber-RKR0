@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		List<Cab> c = cabRepository2.findByAvaible(true);
 		Cab cab = c.get(0);
-		cab.setAvaible(false);
+		cab.setAvailable(false);
 		cabRepository2.save(cab);
 		
 		trip.setCustomer(cus.get());
@@ -84,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.CANCELED);
 		Cab c = cabRepository2.findByDriver(tt.getDriver().getDriverId());
-		c.setAvaible(false);
+		c.setAvailable(false);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);
 	}
@@ -99,7 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tt = trip.get();
 		tt.setStatus(TripStatus.COMPLETED);
 		Cab c = cabRepository2.findByDriver(tt.getDriver().getDriverId());
-		c.setAvaible(false);
+		c.setAvailable(false);
 		cabRepository2.save(c);
 		tripBookingRepository2.save(tt);
 	}
